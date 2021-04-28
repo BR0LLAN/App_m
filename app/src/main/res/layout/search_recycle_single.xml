@@ -8,8 +8,8 @@
     android:background="@drawable/borderline_for_recycle">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginRight="10dp"
             android:layout_below="@+id/image_product"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_favorite_icon" />
@@ -65,6 +65,7 @@
             android:layout_width="25dp"
             android:layout_height="21dp"
             android:layout_below="@+id/imageView_fav"
+            android:layout_marginRight="10dp"
             android:layout_alignRight="@+id/s_title_product"
             android:layout_alignParentRight="true"
             android:layout_marginTop="9dp"

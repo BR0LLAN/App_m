@@ -9,11 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-
 
 public class FavoritesFragment extends Fragment {
 
@@ -31,21 +26,6 @@ public class FavoritesFragment extends Fragment {
 
        recyclerView.setLayoutManager(layoutManager);
 
-       FirebaseFirestore connectDB = FirebaseFirestore.getInstance();
-       connectDB.collection("Motherboard").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-           @Override
-           public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-               if(queryDocumentSnapshots.isEmpty()){
-                   //ff
-               } else {
-                   for (DocumentSnapshot snapshot : queryDocumentSnapshots){
-                       snapshot.getId();
-
-
-                   }
-               }
-           }
-       });
 
 
         recyclerView.setAdapter(favoriteAdapter);

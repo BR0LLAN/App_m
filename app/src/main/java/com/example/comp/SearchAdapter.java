@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +45,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 String uid = user.getUid();
+
                 Map<String, Object> docData = new HashMap<>();
-                ArrayList<String> orders = new ArrayList<>();
-                String[] order = {};
+                docData.put("orders", FieldValue.arrayUnion(datalist.get(position).getId_product()));
 
-                 orders.add(datalist.get(position).getId_product());
-
-                docData.put("orders", Arrays.asList(orders));
                 connectDB.collection("Users").document(uid).update(docData);
             }
         });
