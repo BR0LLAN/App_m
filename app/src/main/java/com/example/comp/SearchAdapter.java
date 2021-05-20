@@ -36,7 +36,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.title_p.setText(datalist.get(position).getTitle_product());
-        holder.price_p.setText(datalist.get(position).getPrice());
+        holder.price_p.setText(datalist.get(position).getPrice() + " ");
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +64,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         private TextView title_p;
         private TextView price_p;
         private ImageView imageView;
+        private TextView count_p;
+        private ImageView imageViewfav;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title_p = itemView.findViewById(R.id.s_title_product);
             price_p = itemView.findViewById(R.id.s_price_product);
             imageView = itemView.findViewById(R.id.imageView2);
+
+
 
         }
     }

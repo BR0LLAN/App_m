@@ -1,26 +1,27 @@
 package com.example.comp;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.MyViewHolder> {
     ArrayList<ProductsModel> dataListBox;
-    List<String> ord;
+    BoxAdapter adapter;
 
     public BoxAdapter(ArrayList<ProductsModel> dataListBox) {
         this.dataListBox = dataListBox;
@@ -35,27 +36,26 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        //holder.title_p.setText(ord+"");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore connectDB = FirebaseFirestore.getInstance();
-        connectDB.collection("Users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot document = task.getResult();
-                ord = (List<String>) document.get("orders");
-
-                for (String orde : ord){
-                    if (orde == dataListBox.get(position).getId_product()){
-                        String orderId = dataListBox.get(position).getId_product();
-
-                    }
-                    holder.title_p.setText(orde);
-                }
-
+        if (!dataListBox.isEmpty()) {
+            holder.title_p.setText(dataListBox.get(position).getTitle_product());
+            holder.price_p.setText(Html.fromHtml("<font color='#D4D4BD'>Цена • </font>") + dataListBox.get(position).getPrice()+"");
         }
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore connectDB = FirebaseFirestore.getInstance();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        });
+                String uid = user.getUid();
 
+                Map<String, Object> docData = new HashMap<>();
+                docData.put("orders", FieldValue.arrayRemove(dataListBox.get(position).getId_product()));
+
+                connectDB.collection("Users").document(uid).update(docData);
+            }
+
+        });adapter = new BoxAdapter(dataListBox);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -64,10 +64,16 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView title_p;
+        private TextView title_p;
+        private TextView price_p;
+        ImageView deleteBtn;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title_p = itemView.findViewById(R.id.b_title_product);
+            price_p = itemView.findViewById(R.id.b_price_product);
+            deleteBtn = itemView.findViewById(R.id.btn_delete_p);
+
         }
     }
 }

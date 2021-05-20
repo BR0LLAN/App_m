@@ -44,6 +44,7 @@ public class MainFragment extends AppCompatActivity {
                             break;
                         case R.id.nav_box:
                             selectedFragment = new BoxFragment();
+
                             break;
                         case R.id.nav_area:
                             selectedFragment = new PersonalAreaFragment();

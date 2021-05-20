@@ -22,27 +22,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_view_box"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        android:paddingBottom="69dp"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+    <RelativeLayout
+        android:id="@+id/rel"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="60dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:paddingBottom="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/box_itog"
+            android:layout_alignParentBottom="true"/>
+
+        <RelativeLayout
+            android:id="@+id/box_itog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#313131">
+
+            <TextView
+                android:id="@+id/textView111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/roboto_light"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="Ваши товары ("
+                android:textColor="#D4D4BD"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/count_product1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textView111"
+                android:fontFamily="@font/roboto_light"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text=""
+                android:textColor="#D4D4BD"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/ddddddddd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/count_product1"
+                android:fontFamily="@font/roboto_light"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text=")"
+                android:textColor="#D4D4BD"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/box_p_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_free_icon_ruble"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text=""
+                android:textColor="#D4D4BD"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
