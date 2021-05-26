@@ -72,7 +72,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             super(itemView);
             title_p = itemView.findViewById(R.id.s_title_product);
             price_p = itemView.findViewById(R.id.s_price_product);
-            imageView = itemView.findViewById(R.id.imageView2);
+            imageView = itemView.findViewById(R.id.addToBox_btn_img);
+
+
 
 
 

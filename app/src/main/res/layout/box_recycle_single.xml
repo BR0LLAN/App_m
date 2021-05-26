@@ -4,9 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_margin="5dp"
     android:background="@drawable/borderline_for_recycle">
 
     <RelativeLayout
@@ -25,7 +23,6 @@
             />
 
         <ImageView
-            android:id="@+id/btn_delete_p"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_clear_24"
@@ -42,28 +39,12 @@
 
             <TextView
                 android:id="@+id/b_title_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="386dp"
+                android:layout_height="45dp"
                 android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/roboto"
-                android:paddingLeft="5dp"
-                android:paddingRight="50dp"
-                android:textColor="#D4D4BD"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/b_price_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_centerVertical="true"
-                android:drawableRight="@drawable/ic_free_icon_ruble"
-                android:layout_below="@+id/b_title_product"
                 android:fontFamily="@font/roboto"
                 android:paddingLeft="5dp"
                 android:paddingRight="50dp"
