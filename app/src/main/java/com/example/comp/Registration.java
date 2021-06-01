@@ -111,8 +111,8 @@ public class Registration extends AppCompatActivity {
                                     String emailU = user.getEmail();
 
                                     Map<String, Object> dataUser = new HashMap<>();
-                                    String[] order = {};
-                                    String[] favorite = {};
+                                    String[] order = {" "};
+                                    String[] favorite = {" "};
 
                                     dataUser.put("uid", uid);
                                     dataUser.put("email", emailU);

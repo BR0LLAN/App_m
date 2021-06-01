@@ -7,8 +7,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,7 +20,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -28,15 +28,14 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 
 public class SearchFragment extends Fragment {
 
-    private FirestoreRecyclerAdapter adapter;
-    private RecyclerView recyclerViewList;
-    FirebaseFirestore db;
+    FirestoreRecyclerAdapter adapter;
+    RecyclerView recyclerViewList;
     StorageReference storageReference;
-    private ImageView image_pr;
     EditText searchInput;
 
     @Override
@@ -47,9 +46,9 @@ public class SearchFragment extends Fragment {
         searchInput = view.findViewById(R.id.search_line);
         storageReference= FirebaseStorage.getInstance().getReference();
 
+
         recyclerViewList.setHasFixedSize(true);
         recyclerViewList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
 
         loadData("");
 
@@ -89,30 +88,62 @@ public class SearchFragment extends Fragment {
         adapter = new FirestoreRecyclerAdapter<ProductsModel, MViewHolder>(options) {
             @Override
             public void onBindViewHolder(final MViewHolder holder, final int position, final ProductsModel model) {
-                holder.title_p.setText(model.getTitle_product());
-                holder.price_p.setText(model.getPrice());
+                holder.title_p_SF.setText(model.getTitle_product());
+                holder.price_p_SF.setText(model.getPrice());
 
                 storageReference.child(model.getId_product() + ".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(holder.product_imageView.getContext()).load(uri.toString()).into(holder.product_imageView);
+                        Glide.with(holder.product_imageView_SF.getContext()).load(uri.toString()).into(holder.product_imageView_SF);
                     }
                 });
 
                 holder.addToBoxBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FirebaseFirestore connectDB = FirebaseFirestore.getInstance();
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                        String uid = user.getUid();
-
+                        Animation animScale = AnimationUtils.loadAnimation(getContext(), R.anim.scale_btn);
+                        v.startAnimation(animScale);
+                        Random random = new Random();
                         Map<String, Object> docData = new HashMap<>();
-                        docData.put("orders", FieldValue.arrayUnion(model.getId_product()));
+                        docData.put("id_product", model.getId_product());
+                        docData.put("title_product", model.getTitle_product());
+                        docData.put("price", model.getPrice());
+                        docData.put("time_do_order", FieldValue.serverTimestamp());
 
-                        connectDB.collection("Users").document(uid).update(docData);
+                        FirebaseFirestore.getInstance()
+                                .collection("Users").document(FirebaseAuth.getInstance().getUid())
+                                .collection("Orders").document(random.nextInt()+model.getId_product()).set(docData);
                     }
                 });
+
+                holder.addToFavBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Animation animScale = AnimationUtils.loadAnimation(getContext(), R.anim.scale_btn);
+                        v.startAnimation(animScale);
+                        Random random = new Random();
+                        Map<String, Object> docData1 = new HashMap<>();
+                        docData1.put("id_product", model.getId_product());
+                        docData1.put("title_product", model.getTitle_product());
+                        docData1.put("price", model.getPrice());
+                        docData1.put("time_do_order", FieldValue.serverTimestamp());
+
+                        FirebaseFirestore.getInstance()
+                                .collection("Users").document(FirebaseAuth.getInstance().getUid())
+                                .collection("Favorites").document(model.getId_product()).set(docData1);
+                    }
+                });
+
+                /*holder.v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment fr = new SearchFragment();
+                        Bundle args = new Bundle();
+                        args.putInt("itemKey", );
+                        fr.setArguments(args);
+                    }
+                });*/
+
 
             }
 

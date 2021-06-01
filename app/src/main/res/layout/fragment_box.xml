@@ -26,7 +26,7 @@
         android:id="@+id/rel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:paddingTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,19 +35,38 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/box_itog"
+            android:paddingBottom="30dp"/>
+
+        <TextView
+            android:id="@+id/textView129222"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:paddingBottom="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/box_itog"
-            android:layout_alignParentBottom="true"/>
+            android:fontFamily="@font/roboto_light"
+            android:text="Ваша корзина пустая!"
+            android:textColor="#9A9999"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/buy_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="540dp"
+            android:layout_marginLeft="320dp"
+            android:background="@drawable/ic_btn_next"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/roboto"
+            android:focusable="true"
+            android:text="Купить"/>
 
         <RelativeLayout
             android:id="@+id/box_itog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:background="#313131">
 
             <TextView
@@ -63,22 +82,23 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/count_product1"
+                android:id="@+id/count_product_BF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/textView111"
                 android:fontFamily="@font/roboto_light"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text=""
+                android:text="0"
                 android:textColor="#D4D4BD"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                />
 
             <TextView
                 android:id="@+id/ddddddddd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/count_product1"
+                android:layout_toRightOf="@+id/count_product_BF"
                 android:fontFamily="@font/roboto_light"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
@@ -95,12 +115,13 @@
                 android:drawableRight="@drawable/ic_free_icon_ruble"
                 android:fontFamily="@font/roboto_medium"
                 android:paddingTop="5dp"
+                android:text="0"
                 android:paddingBottom="5dp"
-                android:text=""
                 android:textColor="#D4D4BD"
                 android:textSize="20sp" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
 
